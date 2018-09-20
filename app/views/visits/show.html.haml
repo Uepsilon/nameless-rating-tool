@@ -1,0 +1,14 @@
+%p#notice= notice
+%p
+  %strong Location:
+  = @visit.location.title
+%p
+  %strong Visitors
+  - @visit.users.each do |user|
+    = render 'visitor', visitor: user
+%p
+  %strong Visited at:
+  = l @visit.visited_at, format: :long
+= link_to 'Edit', [:edit, @location, @visit]
+|
+= link_to 'Back', [@location, :visits]
