@@ -1,0 +1,6 @@
+.places-search
+  %h2.subtitle Search Foo
+  .field
+    .control
+      = text_field_tag :place_search, nil, data: { action: 'keyup->location#searchLocation' }, placeholder: 'do this', class: 'input'
+  %div{ data: { target: 'location.searchResult' }}

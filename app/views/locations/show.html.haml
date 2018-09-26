@@ -2,8 +2,6 @@
 %p
   = @location.name
 %p
-  = @location.place_id
-%p
   = @location.street
 %p
   = @location.street_number
@@ -15,12 +13,11 @@
   = @location.phone_number
 %p
   = @location.website
-%p
-  = @location.lonlat.x
-  = @location.lonlat.y
+
 
 %iframe{:allowfullscreen => "", :frameborder => "0", :height => "450", :src => "https://www.google.com/maps/embed/v1/place?q=place_id:#{@location.place_id}&key=#{Rails.application.credentials.google[:api_key]}", :style => "border:0", :width => "600"}
 
-= link_to 'Edit', edit_location_path(@location)
-|
-= link_to 'Back', locations_path
+%p
+  = link_to 'Edit', edit_location_path(@location)
+  |
+  = link_to 'Back', locations_path

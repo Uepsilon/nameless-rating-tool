@@ -1,0 +1,6 @@
+.navbar.is-dark{ role: 'navigation', aria: { label: 'main navigation' }}
+  .navbar-brand
+    .navbar-item{ href: locations_url }
+      = image_tag asset_pack_path('images/marker.png')
+      FooBar
+    = link_to 'Locations', :locations, class: 'navbar-item'

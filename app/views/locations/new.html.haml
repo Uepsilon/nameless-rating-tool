@@ -1,3 +1,8 @@
-%h1 New Location
-= render 'form', location: @location
-= link_to 'Back', locations_path
+%div{ data: { controller: 'location' }}
+  = render 'places_search'
+
+  %hr
+
+  %h1.title New Location
+  = render 'form', location: @location
+  = link_to 'Back', locations_path

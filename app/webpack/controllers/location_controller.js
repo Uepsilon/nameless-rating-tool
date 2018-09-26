@@ -12,12 +12,20 @@ export default class extends Controller {
   searchLocation = event => {
     clearTimeout(this.searchTimeout)
     this.searchTimeout = setTimeout(() => {
-      const query = this.trimQuery(event.srcElement.value)
+      const srcElement = event.srcElement
+      const query = this.trimQuery(srcElement.value)
       if (query.length <= 3 || this.lastQuery == query)
         return
 
       this.searchResultTarget.innerHTML = ''
-      this.search(query)
+      srcElement.parentElement.classList.add('is-loading')
+      srcElement.setAttribute('readonly', true)
+      this.search(query, srcElement)
+        .then(() => {
+          srcElement.removeAttribute('readonly')
+          srcElement.parentElement.classList.remove('is-loading')
+          srcElement.focus()
+        })
     }, 300)
   }
 
@@ -55,7 +63,7 @@ export default class extends Controller {
       }
     }
 
-    fetch(`/locations/places_search?q=${locationName}`, requestOptions)
+    return fetch(`/locations/places_search?q=${locationName}`, requestOptions)
       .then(response => response.json())
       .then(json => {
         this.processPlaces(locationName, json)

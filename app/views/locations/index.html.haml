@@ -1,18 +1,32 @@
 %p#notice= notice
-%h1 Locations
-%table
+%h1.title Locations
+%table.table.is-striped.is-fullwidth
   %thead
     %tr
       %th Name
       %th City
-      %th{:colspan => "3"}
+      %th{ width: '30%' }
   %tbody
     - @locations.each do |location|
       %tr
         %td= location.name
         %td= location.city
-        %td= link_to 'Show', location
-        %td= link_to 'Edit', edit_location_path(location)
-        %td= link_to 'Destroy', location, method: :delete, data: { confirm: 'Are you sure?' }
+        %td
+          .buttons
+            = link_to location, class: 'button' do
+              %span.icon
+                %i.material-icons visibility
+              %span Details
+            = link_to edit_location_path(location), class: 'button' do
+              %span.icon
+                %i.material-icons edit
+              %span Edit
+            = link_to location, method: :delete, data: { confirm: 'Are you sure?' }, class: 'button is-danger' do
+              %span.icon
+                %i.material-icons delete
+              %span Delete
 %br/
-= link_to 'New Location', new_location_path
+= link_to new_location_path, class: 'button is-success' do
+  %span.icon
+    %i.material-icons add
+  %span New Location

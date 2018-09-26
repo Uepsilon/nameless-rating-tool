@@ -6,15 +6,21 @@
 //
 // To reference this file, add <%= javascript_pack_tag 'application' %> to the appropriate
 // layout file, like app/views/layouts/application.html.erb
+import { Application } from 'stimulus'
+import { definitionsFromContext } from 'stimulus/webpack-helpers'
+import Rails from 'rails-ujs'
+import Turbolinks from 'turbolinks'
 
-import { Application } from "stimulus"
-import { definitionsFromContext } from "stimulus/webpack-helpers"
-import Rails from 'rails-ujs';
-import Turbolinks from 'turbolinks';
+// styles
+import '../stylesheets/application'
+
+// images
+require.context('../images', true, /\.(png|jp(e*)g|svg)$/)
+require.context('../images/favicons', true, /\.(png|jp(e*)g|svg|ico)$/)
 
 Rails.start();
 Turbolinks.start();
 
 const application = Application.start()
-const context = require.context("controllers", true, /.js$/)
+const context = require.context('controllers', true, /.js$/)
 application.load(definitionsFromContext(context))

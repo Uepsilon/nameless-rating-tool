@@ -1,9 +1,4 @@
-%div{ data: { controller: 'location' }}
-  %span Search Foo
-  = text_field_tag :place_search, nil, data: { action: 'keyup->location#searchLocation' }, placeholder: 'do this'
-  %div{ data: { target: 'location.searchResult' }}
-  %hr
-
+.form
   = form_with(model: location, local: true) do |form|
     - if location.errors.any?
       #error_explanation
@@ -15,30 +10,30 @@
             %li= message
     .field
       = form.label :name
-      = form.text_field :name, data: { target: 'location.name' }
+      .control= form.text_field :name, data: { target: 'location.name' }, class: 'input'
     .field
       = form.label :place_id
-      = form.text_field :place_id, data: { target: 'location.placeId' }
+      .control= form.text_field :place_id, data: { target: 'location.placeId' }, class: 'input'
     .field
       = form.label :street
-      = form.text_field :street, data: { target: 'location.street' }
+      .control= form.text_field :street, data: { target: 'location.street' }, class: 'input'
     .field
       = form.label :street_number
-      = form.text_field :street_number, data: { target: 'location.streetNumber' }
+      .control= form.text_field :street_number, data: { target: 'location.streetNumber' }, class: 'input'
     .field
       = form.label :zip_code
-      = form.text_field :zip_code, data: { target: 'location.zipCode' }
+      .control= form.text_field :zip_code, data: { target: 'location.zipCode' }, class: 'input'
     .field
       = form.label :city
-      = form.text_field :city, data: { target: 'location.city' }
+      .control= form.text_field :city, data: { target: 'location.city' }, class: 'input'
     .field
       = form.label :phone_number
-      = form.text_field :phone_number, data: { target: 'location.phoneNumber' }
+      .control= form.text_field :phone_number, data: { target: 'location.phoneNumber' }, class: 'input'
     .field
       = form.label :website
-      = form.text_field :website, data: { target: 'location.website' }
+      .control= form.text_field :website, data: { target: 'location.website' }, class: 'input'
       = form.hidden_field :latitude, data: { target: 'location.latitude' }
       = form.hidden_field :longitude, data: { target: 'location.longitude' }
 
     .actions
-      = form.submit
+      = form.submit class: 'button is-primary'
