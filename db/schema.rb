@@ -14,11 +14,22 @@ ActiveRecord::Schema.define(version: 2018_09_11_135246) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "postgis"
 
   create_table "locations", force: :cascade do |t|
-    t.string "title", null: false
+    t.string "name", null: false
+    t.string "place_id"
+    t.string "street", null: false
+    t.string "street_number", null: false
+    t.string "zip_code", null: false
+    t.string "city", null: false
+    t.string "phone_number"
+    t.string "website"
+    t.geography "lonlat", limit: {:srid=>4326, :type=>"st_point", :geographic=>true}
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["lonlat"], name: "index_locations_on_lonlat", using: :gist
+    t.index ["place_id"], name: "index_locations_on_place_id"
   end
 
   create_table "users", force: :cascade do |t|

@@ -1,7 +1,26 @@
 %p#notice= notice
 %p
-  %strong Title:
-  = @location.title
+  = @location.name
+%p
+  = @location.place_id
+%p
+  = @location.street
+%p
+  = @location.street_number
+%p
+  = @location.zip_code
+%p
+  = @location.city
+%p
+  = @location.phone_number
+%p
+  = @location.website
+%p
+  = @location.lonlat.x
+  = @location.lonlat.y
+
+%iframe{:allowfullscreen => "", :frameborder => "0", :height => "450", :src => "https://www.google.com/maps/embed/v1/place?q=place_id:#{@location.place_id}&key=#{Rails.application.credentials.google[:api_key]}", :style => "border:0", :width => "600"}
+
 = link_to 'Edit', edit_location_path(@location)
 |
 = link_to 'Back', locations_path

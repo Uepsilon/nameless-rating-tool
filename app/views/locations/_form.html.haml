@@ -1,14 +1,44 @@
-= form_with(model: location, local: true) do |form|
-  - if location.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(location.errors.count, "error")
-        prohibited this location from being saved:
-      %ul
-        - location.errors.full_messages.each do |message|
-          %li= message
-  .field
-    = form.label :title
-    = form.text_field :title
-  .actions
-    = form.submit
+%div{ data: { controller: 'location' }}
+  %span Search Foo
+  = text_field_tag :place_search, nil, data: { action: 'keyup->location#searchLocation' }, placeholder: 'do this'
+  %div{ data: { target: 'location.searchResult' }}
+  %hr
+
+  = form_with(model: location, local: true) do |form|
+    - if location.errors.any?
+      #error_explanation
+        %h2
+          = pluralize(location.errors.count, "error")
+          prohibited this location from being saved:
+        %ul
+          - location.errors.full_messages.each do |message|
+            %li= message
+    .field
+      = form.label :name
+      = form.text_field :name, data: { target: 'location.name' }
+    .field
+      = form.label :place_id
+      = form.text_field :place_id, data: { target: 'location.placeId' }
+    .field
+      = form.label :street
+      = form.text_field :street, data: { target: 'location.street' }
+    .field
+      = form.label :street_number
+      = form.text_field :street_number, data: { target: 'location.streetNumber' }
+    .field
+      = form.label :zip_code
+      = form.text_field :zip_code, data: { target: 'location.zipCode' }
+    .field
+      = form.label :city
+      = form.text_field :city, data: { target: 'location.city' }
+    .field
+      = form.label :phone_number
+      = form.text_field :phone_number, data: { target: 'location.phoneNumber' }
+    .field
+      = form.label :website
+      = form.text_field :website, data: { target: 'location.website' }
+      = form.hidden_field :latitude, data: { target: 'location.latitude' }
+      = form.hidden_field :longitude, data: { target: 'location.longitude' }
+
+    .actions
+      = form.submit
