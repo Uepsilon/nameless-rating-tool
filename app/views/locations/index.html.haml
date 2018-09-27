@@ -5,14 +5,14 @@
     %tr
       %th Name
       %th City
-      %th{ width: '30%' }
+      %th
   %tbody
     - @locations.each do |location|
       %tr
         %td= location.name
         %td= location.city
         %td
-          .buttons
+          .buttons.is-pulled-right
             = link_to location, class: 'button' do
               %span.icon
                 %i.material-icons visibility

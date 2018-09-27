@@ -47,6 +47,7 @@ class LocationsController < ApplicationController
 
   def places_search
     @places = places_client.spots_by_query(search_params, types: %w[restaurants, food])
+    render layout: nil
   end
 
   def place_details

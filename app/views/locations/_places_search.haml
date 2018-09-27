@@ -1,6 +1,7 @@
-.places-search
-  %h2.subtitle Search Foo
+.places-search{data: {target: 'location.placesSearchBox' }}
   .field
     .control
-      = text_field_tag :place_search, nil, data: { action: 'keyup->location#searchLocation' }, placeholder: 'do this', class: 'input'
+      = text_field_tag :place_search, nil, data: { action: 'keyup->location#searchLocation' }, placeholder: 'Search for a location (e.g. Die Fette Kuh, Köln)', class: 'input'
   %div{ data: { target: 'location.searchResult' }}
+
+  %hr

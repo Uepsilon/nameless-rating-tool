@@ -1,0 +1,8 @@
+%table.table.is-striped.is-fullwidth.is-hoverable.is-narrow.places-search-results
+  %thead
+    %tr
+      %th Name
+      %th Address
+  %tbody
+    - @places.each do |place|
+      = render 'place_result', place: place

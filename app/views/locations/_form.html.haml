@@ -1,13 +1,15 @@
 .form
   = form_with(model: location, local: true) do |form|
     - if location.errors.any?
-      #error_explanation
-        %h2
-          = pluralize(location.errors.count, "error")
-          prohibited this location from being saved:
-        %ul
-          - location.errors.full_messages.each do |message|
-            %li= message
+      .notification.is-danger#error_explanation
+        %button.delete
+        .content
+          %h4.subline
+            = pluralize(location.errors.count, "error")
+            prohibited this location from being saved:
+          %ul
+            - location.errors.full_messages.each do |message|
+              %li= message
     .field
       = form.label :name
       .control= form.text_field :name, data: { target: 'location.name' }, class: 'input'
@@ -35,5 +37,12 @@
       = form.hidden_field :latitude, data: { target: 'location.latitude' }
       = form.hidden_field :longitude, data: { target: 'location.longitude' }
 
-    .actions
-      = form.submit class: 'button is-primary'
+    .actions.buttons
+      = link_to back_target, class: 'button' do
+        %span.icon
+          %i.material-icons chevron_left
+        %span Back
+      = button_tag class: 'button is-primary' do
+        %span.icon
+          %i.material-icons check
+        %span Create Location

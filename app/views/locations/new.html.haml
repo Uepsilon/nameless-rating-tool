@@ -1,8 +1,5 @@
 %div{ data: { controller: 'location' }}
   = render 'places_search'
 
-  %hr
-
   %h1.title New Location
-  = render 'form', location: @location
-  = link_to 'Back', locations_path
+  = render 'form', location: @location, back_target: locations_path
