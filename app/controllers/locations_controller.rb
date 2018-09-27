@@ -12,19 +12,21 @@ class LocationsController < ApplicationController
 
   # GET /locations/new
   def new
-    @location = Location.new
+    @form = LocationForm.new(Location.new)
   end
 
   # GET /locations/1/edit
   def edit
+    @form = LocationForm.new(@location)
+    @form.prepopulate!
   end
 
   # POST /locations
   def create
-    @location = Location.new(location_params)
-
-    if @location.save
-      redirect_to @location, notice: 'Location was successfully created.'
+    @form = LocationForm.new(Location.new)
+    if @form.validate(location_params)
+      @form.save
+      redirect_to @form.model, notice: 'Location was successfully created.'
     else
       render :new
     end
@@ -32,8 +34,11 @@ class LocationsController < ApplicationController
 
   # PATCH/PUT /locations/1
   def update
-    if @location.update(location_params)
-      redirect_to @location, notice: 'Location was successfully updated.'
+    @form = LocationForm.new(@location)
+    p location_params
+    if @form.validate(location_params)
+      @form.save
+      redirect_to @form.model, notice: 'Location was successfully updated.'
     else
       render :edit
     end

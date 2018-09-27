@@ -1,14 +1,14 @@
 .form
-  = form_with(model: location, local: true) do |form|
-    - if location.errors.any?
+  = form_for @form do |form|
+    - if @form.errors.any?
       .notification.is-danger#error_explanation
         %button.delete
         .content
           %h4.subline
-            = pluralize(location.errors.count, "error")
+            = pluralize(@form.errors.count, "error")
             prohibited this location from being saved:
           %ul
-            - location.errors.full_messages.each do |message|
+            - @form.errors.full_messages.each do |message|
               %li= message
     .field
       = form.label :name
@@ -34,15 +34,19 @@
     .field
       = form.label :website
       .control= form.text_field :website, data: { target: 'location.website' }, class: 'input'
-      = form.hidden_field :latitude, data: { target: 'location.latitude' }
-      = form.hidden_field :longitude, data: { target: 'location.longitude' }
+    .field
+      = form.label :latitude
+      .control= form.text_field :latitude, data: { target: 'location.latitude' }, class: 'input'
+    .field
+      = form.label :longitude
+      .control= form.text_field :longitude, data: { target: 'location.longitude' }, class: 'input'
 
     .actions.buttons
       = link_to back_target, class: 'button' do
         %span.icon
-          %i.material-icons chevron_left
+          %i.material-icons  chevron_left
         %span Back
       = button_tag class: 'button is-primary' do
         %span.icon
-          %i.material-icons check
-        %span Create Location
+          %i.material-icons save
+        %span= @form.model.new_record? ? 'Create Location' : 'Update Location'

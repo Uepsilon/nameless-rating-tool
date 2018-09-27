@@ -1,23 +1,36 @@
-%p#notice= notice
-%p
-  = @location.name
-%p
-  = @location.street
-%p
-  = @location.street_number
-%p
-  = @location.zip_code
-%p
-  = @location.city
-%p
-  = @location.phone_number
-%p
-  = @location.website
+.columns
+  .column.is-half.content
+    %h1.title= @location.name
+    %dl
+      %dt Address
+      %dd
+        = @location.street
+        = @location.street_number
+        %br
+        = @location.zip_code
+        = @location.city
 
+    - if @location.phone_number?
+      %dl
+        %dt Phone
+        %dd= @location.phone_number
 
-%iframe{:allowfullscreen => "", :frameborder => "0", :height => "450", :src => "https://www.google.com/maps/embed/v1/place?q=place_id:#{@location.place_id}&key=#{Rails.application.credentials.google[:api_key]}", :style => "border:0", :width => "600"}
+    - if @location.website?
+      %dl
+        %dt Website
+        %dd= link_to @location.website, @location.website, target: :_blank
 
-%p
-  = link_to 'Edit', edit_location_path(@location)
-  |
-  = link_to 'Back', locations_path
+  .column.is-half
+    %iframe{ allowfullscreen: '', frameborder: '0', height: '450', src: "https://www.google.com/maps/embed/v1/place?q=place_id:#{@location.place_id}&key=#{Rails.application.credentials.google[:api_key]}", style: 'border:0', width: '100%' }
+
+.columns
+  .buttons
+    = link_to locations_path, class: 'button' do
+      %span.icon
+        %i.material-icons  chevron_left
+      %span Back
+
+    = link_to edit_location_path(@location), class: 'button is-info' do
+      %span.icon
+        %i.material-icons edit
+      %span Edit
