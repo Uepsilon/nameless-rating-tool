@@ -1,7 +1,7 @@
 import { Controller } from "stimulus"
 
 export default class extends Controller {
-  static targets = [ 'placesSearchBox', 'searchResult', 'name', 'placeId', 'street', 'streetNumber', 'zipCode', 'city', 'phoneNumber', 'website', 'latitude', 'longitude' ]
+  static targets = [ 'placesSearchBox', 'searchResult', 'name', 'placeId', 'street', 'streetNumber', 'zipCode', 'city', 'country', 'phoneNumber', 'website', 'latitude', 'longitude' ]
 
   connect() {
     let searchTimeout = null
@@ -46,6 +46,7 @@ export default class extends Controller {
         this.streetNumberTarget.value = json.street_number
         this.zipCodeTarget.value = json.postal_code
         this.cityTarget.value = json.city
+        this.countryTarget.value = json.country
         this.phoneNumberTarget.value = json.international_phone_number
         this.websiteTarget.value = json.website
         this.latitudeTarget.value = json.lat

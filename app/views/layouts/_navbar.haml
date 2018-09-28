@@ -3,4 +3,8 @@
     .navbar-item{ href: locations_url }
       = image_tag asset_pack_path('images/marker.png')
       FooBar
-    = link_to 'Locations', :locations, class: 'navbar-item'
+  .navbar-menu
+    .navbar-end
+      = link_to 'Rateable Attributes', :rateable_attributes, class: 'navbar-item'
+      = link_to 'Locations', :locations, class: 'navbar-item'
+      = link_to 'Users', :users, class: 'navbar-item'

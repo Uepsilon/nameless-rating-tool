@@ -5,11 +5,14 @@ class LocationForm < Reform::Form
   property :street_number
   property :zip_code
   property :city
+  property :country
   property :phone_number
   property :website
   property :lonlat
   property :latitude, virtual: true, prepopulator: -> (options) { self.latitude = model.latitude }
   property :longitude, virtual: true, prepopulator: -> (options) { self.longitude = model.longitude }
+
+  property :rateable_attribute_ids
 
   validates :name, presence: true
   validates :place_id, presence: true
@@ -17,6 +20,7 @@ class LocationForm < Reform::Form
   validates :street_number, presence: true
   validates :zip_code, presence: true
   validates :city, presence: true
+  validates :country, presence: true
 
   validates_uniqueness_of :place_id
 

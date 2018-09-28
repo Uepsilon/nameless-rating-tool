@@ -1,10 +1,31 @@
-= form_for @rateable_attribute do |f|
-  - if @rateable_attribute.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@rateable_attribute.errors.count, "error")} prohibited this rateable_attribute from being saved:"
-      %ul
-        - @rateable_attribute.errors.full_messages.each do |message|
-          %li= message
+.form
+  = form_for @form do |form|
+    - if @form.errors.any?
+      .notification.is-danger#error_explanation
+        %button.delete
+        .content
+          %h4.subline
+            = pluralize(@form.errors.count, "error")
+            prohibited this attribute from being saved:
+          %ul
+            - @form.errors.full_messages.each do |message|
+              %li= message
+    .field
+      = form.label :name
+      .control= form.text_field :title, class: 'input'
 
-  .actions
-    = f.submit 'Save'
+    = form.collection_check_boxes :location_ids, Location.all, :id, :name do |m|
+      .field
+        = m.label do
+          = m.check_box
+          = m.object.name
+
+    .actions.buttons
+      = link_to back_target, class: 'button' do
+        %span.icon
+          %i.material-icons  chevron_left
+        %span Back
+      = button_tag class: 'button is-primary' do
+        %span.icon
+          %i.material-icons save
+        %span= @form.model.new_record? ? 'Create Attribute' : 'Update Attribute'

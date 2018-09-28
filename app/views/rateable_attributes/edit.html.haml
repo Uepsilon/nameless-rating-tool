@@ -1,7 +1,3 @@
-%h1 Editing rateable_attribute
-
-= render 'form'
-
-= link_to 'Show', @rateable_attribute
-\|
-= link_to 'Back', rateable_attributes_path
+.content
+  %h1 Editing Attribute
+  = render 'form', rateable_attribute: @rateable_attribute, back_target: @rateable_attribute

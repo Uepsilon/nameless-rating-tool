@@ -20,6 +20,12 @@
         %dt Website
         %dd= link_to @location.website, @location.website, target: :_blank
 
+    - if @location.rateable_attributes.any?
+      %dl
+        %dt Attributes
+        - @location.rateable_attributes.each do |attribute|
+          %dd= attribute.title
+
   .column.is-half
     %iframe{ allowfullscreen: '', frameborder: '0', height: '450', src: "https://www.google.com/maps/embed/v1/place?q=place_id:#{@location.place_id}&key=#{Rails.application.credentials.google[:api_key]}", style: 'border:0', width: '100%' }
 

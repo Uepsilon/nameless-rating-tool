@@ -1,5 +1,3 @@
-%h1 New rateable_attribute
-
-= render 'form'
-
-= link_to 'Back', rateable_attributes_path
+.content
+  %h1.title New Attribute
+  = render 'form', form: @form, back_target: rateable_attributes_path

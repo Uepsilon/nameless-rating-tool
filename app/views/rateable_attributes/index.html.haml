@@ -1,19 +1,32 @@
-%h1 Listing rateable_attributes
-
-%table
+%p#notice= notice
+%h1.title Attributes
+%table.table.is-striped.is-fullwidth
   %thead
     %tr
+      %th Title
+      %th Locations
       %th
-      %th
-      %th
-
   %tbody
     - @rateable_attributes.each do |rateable_attribute|
       %tr
-        %td= link_to 'Show', rateable_attribute
-        %td= link_to 'Edit', edit_rateable_attribute_path(rateable_attribute)
-        %td= link_to 'Destroy', rateable_attribute, method: :delete, data: { confirm: 'Are you sure?' }
-
-%br
-
-= link_to 'New Rateable attribute', new_rateable_attribute_path
+        %td= rateable_attribute.title
+        %td= rateable_attribute.locations.size
+        %td
+          .buttons.is-pulled-right
+            = link_to rateable_attribute, class: 'button' do
+              %span.icon
+                %i.material-icons visibility
+              %span Details
+            = link_to edit_rateable_attribute_path(rateable_attribute), class: 'button' do
+              %span.icon
+                %i.material-icons edit
+              %span Edit
+            = link_to rateable_attribute, method: :delete, data: { confirm: 'Are you sure?' }, class: 'button is-danger' do
+              %span.icon
+                %i.material-icons delete
+              %span Delete
+%br/
+= link_to new_rateable_attribute_path, class: 'button is-success' do
+  %span.icon
+    %i.material-icons add
+  %span New Attribute

@@ -16,30 +16,47 @@
     .field
       = form.label :place_id
       .control= form.text_field :place_id, data: { target: 'location.placeId' }, class: 'input'
-    .field
-      = form.label :street
-      .control= form.text_field :street, data: { target: 'location.street' }, class: 'input'
-    .field
-      = form.label :street_number
-      .control= form.text_field :street_number, data: { target: 'location.streetNumber' }, class: 'input'
-    .field
-      = form.label :zip_code
-      .control= form.text_field :zip_code, data: { target: 'location.zipCode' }, class: 'input'
-    .field
-      = form.label :city
-      .control= form.text_field :city, data: { target: 'location.city' }, class: 'input'
+
+    .field.field.is-grouped
+      .control
+        = form.label :street
+        = form.text_field :street, data: { target: 'location.street' }, class: 'input'
+      .control
+        = form.label :street_number
+        = form.text_field :street_number, data: { target: 'location.streetNumber' }, class: 'input'
+
+    .field.field.is-grouped
+      .control
+        = form.label :zip_code
+        = form.text_field :zip_code, data: { target: 'location.zipCode' }, class: 'input', size: 5
+      .control
+        = form.label :city
+        = form.text_field :city, data: { target: 'location.city' }, class: 'input'
+      .control
+        = form.label :country
+        = form.text_field :country, data: { target: 'location.country' }, class: 'input'
+
     .field
       = form.label :phone_number
       .control= form.text_field :phone_number, data: { target: 'location.phoneNumber' }, class: 'input'
     .field
       = form.label :website
       .control= form.text_field :website, data: { target: 'location.website' }, class: 'input'
-    .field
-      = form.label :latitude
-      .control= form.text_field :latitude, data: { target: 'location.latitude' }, class: 'input'
-    .field
-      = form.label :longitude
-      .control= form.text_field :longitude, data: { target: 'location.longitude' }, class: 'input'
+
+    .field.is-grouped
+      .control
+        = form.label :latitude
+        = form.text_field :latitude, data: { target: 'location.latitude' }, class: 'input'
+      .control
+        = form.label :longitude
+        = form.text_field :longitude, data: { target: 'location.longitude' }, class: 'input'
+
+    .panel
+      .panel-heading Attributes
+      = form.collection_check_boxes :rateable_attribute_ids, RateableAttribute.all, :id, :title do |m|
+        = m.label class: 'panel-block' do
+          = m.check_box
+          = m.object.title
 
     .actions.buttons
       = link_to back_target, class: 'button' do

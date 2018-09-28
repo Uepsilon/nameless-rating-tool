@@ -5,26 +5,11 @@
     %tr
       %th Name
       %th City
+      %th Attributes
       %th
   %tbody
     - @locations.each do |location|
-      %tr
-        %td= location.name
-        %td= location.city
-        %td
-          .buttons.is-pulled-right
-            = link_to location, class: 'button' do
-              %span.icon
-                %i.material-icons visibility
-              %span Details
-            = link_to edit_location_path(location), class: 'button' do
-              %span.icon
-                %i.material-icons edit
-              %span Edit
-            = link_to location, method: :delete, data: { confirm: 'Are you sure?' }, class: 'button is-danger' do
-              %span.icon
-                %i.material-icons delete
-              %span Delete
+      = render 'location', location: location, editable: true
 %br/
 = link_to new_location_path, class: 'button is-success' do
   %span.icon

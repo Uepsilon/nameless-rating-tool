@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 2018_09_28_122651) do
     t.string "street_number", null: false
     t.string "zip_code", null: false
     t.string "city", null: false
+    t.string "country", null: false
     t.string "phone_number"
     t.string "website"
     t.geography "lonlat", limit: {:srid=>4326, :type=>"st_point", :geographic=>true}

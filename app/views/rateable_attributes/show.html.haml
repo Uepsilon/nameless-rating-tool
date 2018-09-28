@@ -1,6 +1,28 @@
-%p#notice= notice
+%h1.title= @rateable_attribute.title
 
+.content
+  %h4.title Locations
+  - if @rateable_attribute.locations.any?
+    %table.table.is-striped.is-fullwidth
+      %thead
+        %tr
+          %th Name
+          %th City
+          %th Attributes
+          %th
+      %tbody
+        - @rateable_attribute.locations.each do |location|
+          = render 'locations/location', location: location
+  - else
+    %p No Locations with this Attribute found
 
-= link_to 'Edit', edit_rateable_attribute_path(@rateable_attribute)
-\|
-= link_to 'Back', rateable_attributes_path
+.buttons
+  = link_to rateable_attributes_path, class: 'button' do
+    %span.icon
+      %i.material-icons  chevron_left
+    %span Back
+
+  = link_to edit_rateable_attribute_path(@rateable_attribute), class: 'button is-info' do
+    %span.icon
+      %i.material-icons edit
+    %span Edit

@@ -1,0 +1,21 @@
+- editable = defined?(editable) ? editable : false
+
+%tr
+  %td= location.name
+  %td= location.city
+  %td= location.rateable_attributes.size
+  %td
+    .buttons.is-pulled-right
+      = link_to location, class: 'button' do
+        %span.icon
+          %i.material-icons visibility
+        %span Details
+      - if editable
+        = link_to edit_location_path(location), class: 'button' do
+          %span.icon
+            %i.material-icons edit
+          %span Edit
+        = link_to location, method: :delete, data: { confirm: 'Are you sure?' }, class: 'button is-danger' do
+          %span.icon
+            %i.material-icons delete
+          %span Delete
