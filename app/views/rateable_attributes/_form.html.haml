@@ -1,0 +1,10 @@
+= form_for @rateable_attribute do |f|
+  - if @rateable_attribute.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@rateable_attribute.errors.count, "error")} prohibited this rateable_attribute from being saved:"
+      %ul
+        - @rateable_attribute.errors.full_messages.each do |message|
+          %li= message
+
+  .actions
+    = f.submit 'Save'

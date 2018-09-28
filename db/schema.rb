@@ -10,11 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_11_135246) do
+ActiveRecord::Schema.define(version: 2018_09_28_122651) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
+
+  create_table "location_rateable_attributes", force: :cascade do |t|
+    t.integer "location_id", null: false
+    t.integer "rateable_attribute_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["location_id", "rateable_attribute_id"], name: "unique_rateable_attribute", unique: true
+    t.index ["location_id"], name: "index_location_rateable_attributes_on_location_id"
+    t.index ["rateable_attribute_id"], name: "index_location_rateable_attributes_on_rateable_attribute_id"
+  end
 
   create_table "locations", force: :cascade do |t|
     t.string "name", null: false
@@ -30,6 +40,24 @@ ActiveRecord::Schema.define(version: 2018_09_11_135246) do
     t.datetime "updated_at", null: false
     t.index ["lonlat"], name: "index_locations_on_lonlat", using: :gist
     t.index ["place_id"], name: "index_locations_on_place_id"
+  end
+
+  create_table "rateable_attributes", force: :cascade do |t|
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.integer "visiting_user_id", null: false
+    t.integer "rateable_attribute_id", null: false
+    t.integer "rating", limit: 2, null: false
+    t.text "review"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["rateable_attribute_id", "visiting_user_id"], name: "index_reviews_on_rateable_attribute_id_and_visiting_user_id", unique: true
+    t.index ["rateable_attribute_id"], name: "index_reviews_on_rateable_attribute_id"
+    t.index ["visiting_user_id"], name: "index_reviews_on_visiting_user_id"
   end
 
   create_table "users", force: :cascade do |t|

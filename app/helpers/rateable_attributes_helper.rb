@@ -1,0 +1,2 @@
+module RateableAttributesHelper
+end

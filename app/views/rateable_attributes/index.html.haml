@@ -1,0 +1,19 @@
+%h1 Listing rateable_attributes
+
+%table
+  %thead
+    %tr
+      %th
+      %th
+      %th
+
+  %tbody
+    - @rateable_attributes.each do |rateable_attribute|
+      %tr
+        %td= link_to 'Show', rateable_attribute
+        %td= link_to 'Edit', edit_rateable_attribute_path(rateable_attribute)
+        %td= link_to 'Destroy', rateable_attribute, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Rateable attribute', new_rateable_attribute_path

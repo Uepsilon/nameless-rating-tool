@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :rateable_attributes
+  resources :reviews
   resources :locations do
     resources :visits
     collection do
